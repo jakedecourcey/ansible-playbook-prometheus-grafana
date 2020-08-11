@@ -1,0 +1,33 @@
+---
+
+# Prometheus users and groups
+prometheus_user: "prometheus"
+prometheus_group: "prometheus"
+
+# Prometheus configuration file and directory
+prometheus_config_path: "/etc/prometheus/"
+prometheus_config_file: "prometheus.yml"
+
+prometheus_provisioning_path: "roles/prometheus/files"
+
+# Prometheus hosts configuration
+prometheus_host_files_source: "{{ prometheus_provisioning_path }}/hosts/"
+prometheus_host_files_path: "{{ prometheus_config_path }}/hosts/"
+
+# Prometheus rules configuration
+prometheus_rule_files_source: "{{ prometheus_provisioning_path }}/rules/"
+prometheus_rule_files_path: "{{ prometheus_config_path }}/rules/"
+
+# Prometheus templates configuration
+prometheus_template_files_source: "{{ prometheus_provisioning_path }}/templates/"
+prometheus_template_files_path: "{{ prometheus_config_path }}/templates/"
+
+# Prometheus WebServer listen address
+prometheus_listen_address: "localhost:9090"
+
+# Prometheus local storage path
+# (see https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects)
+prometheus_tsdb_path: "/var/lib/prometheus"
+
+# Prometheus log level
+prometheus_log_level: "info"

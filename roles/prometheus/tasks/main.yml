@@ -1,0 +1,14 @@
+---
+
+- include: install.yml
+- include: configure.yml
+- include: provision.yml
+
+- name: Start and enable Prometheus services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items:
+    - prometheus
+    - prometheus-alertmanager

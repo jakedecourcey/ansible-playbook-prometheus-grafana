@@ -1,0 +1,9 @@
+---
+
+- name: Sync the grafana dashboards directory
+  synchronize:
+    src: "{{ grafana_paths_dashboards_source }}"
+    dest: "{{ grafana_paths_dashboards }}"
+    delete: yes
+  notify:
+    - restart grafana

@@ -1,0 +1,30 @@
+---
+
+- name: Create the Grafana group
+  group:
+    name: "{{ grafana_group }}"
+    system: true
+    state: present
+
+- name: Create the Grafana user
+  user:
+    name: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+    system: yes
+    createhome: no
+    state: present
+
+- name: install Grafana key
+  shell:
+    cmd: wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+    warn: false
+
+- name: Install Grafana repo
+  apt_repository:
+    repo: deb https://packages.grafana.com/enterprise/deb stable main
+    state: present
+
+- name: Install Grafana
+  package:
+    name: grafana-enterprise
+    state: latest

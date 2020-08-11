@@ -1,0 +1,52 @@
+---
+
+- name: Create the Prometheus host files directory
+  file:
+    name: "{{ prometheus_host_files_path }}"
+    state: directory
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
+    mode: 0755
+
+- name: Sync the promtheus hosts directory
+  synchronize:
+    src: "{{ prometheus_host_files_source }}"
+    dest: "{{ prometheus_host_files_path }}"
+    delete: yes
+  notify:
+    - restart alertmanager
+    - restart prometheus
+
+- name: Create the Prometheus rule files directory
+  file:
+    name: "{{ prometheus_rule_files_path }}"
+    state: directory
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
+    mode: 0755
+
+- name: Sync the promtheus rules directory
+  synchronize:
+    src: "{{ prometheus_rule_files_source }}"
+    dest: "{{ prometheus_rule_files_path }}"
+    delete: yes
+  notify:
+    - restart alertmanager
+    - restart prometheus
+
+- name: Create the Prometheus template directory
+  file:
+    name: "{{ prometheus_template_files_path }}"
+    state: directory
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
+    mode: 0755
+
+- name: Sync the promtheus templates directory
+  synchronize:
+    src: "{{ prometheus_template_files_source }}"
+    dest: "{{ prometheus_template_files_path }}"
+    delete: yes
+  notify:
+    - restart alertmanager
+    - restart prometheus

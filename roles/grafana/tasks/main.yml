@@ -1,0 +1,11 @@
+---
+
+- include: install.yml
+- include: configure.yml
+- include: provision.yml
+
+- name: Start and enable the Grafana service
+  service:
+    name: grafana-server
+    state: started
+    enabled: true

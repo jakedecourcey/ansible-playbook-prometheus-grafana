@@ -1,0 +1,27 @@
+---
+
+- name: Create the Prometheus group
+  group:
+    name: "{{ prometheus_group }}"
+    system: true
+
+- name: Create the Prometheus user
+  user:
+    name: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
+    system: yes
+    createhome: no
+
+- name: install universe repo
+  apt_repository:
+    repo: deb http://archive.ubuntu.com/ubuntu bionic universe
+    state: present
+
+- name: install prometheus packages
+  apt:
+    name: ['prometheus', 'prometheus-alertmanager']
+    state: latest
+    update_cache: yes
+  notify:
+    - restart prometheus
+    - restart alertmanager

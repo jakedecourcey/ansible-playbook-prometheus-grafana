@@ -1,0 +1,44 @@
+---
+
+- name: Create Grafana directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+    mode: 0755
+  with_items:
+    - "{{ grafana_paths_data }}"
+    - "{{ grafana_paths_logs }}"
+    - "{{ grafana_paths_plugins }}"
+    - "{{ grafana_paths_provisioning }}"
+    - "{{ grafana_paths_provisioning }}/datasources"
+    - "{{ grafana_paths_provisioning }}/dashboards"
+    - "{{ grafana_paths_dashboards }}"
+
+- name: Configure Grafana
+  template:
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+    owner: "root"
+    group: "{{ grafana_group }}"
+    mode: 0640
+  notify: restart grafana
+
+- name: Configure datasources
+  template:
+    src: datasources.yml.j2
+    dest: "{{ grafana_paths_provisioning }}/datasources/datasources.yml"
+    owner: "root"
+    group: "{{ grafana_group }}"
+    mode: 0640
+  notify: restart grafana
+
+- name: Configure dashboards
+  template:
+    src: dashboards.yml.j2
+    dest: "{{ grafana_paths_provisioning }}/dashboards/dashboards.yml"
+    owner: "root"
+    group: "{{ grafana_group }}"
+    mode: 0640
+  notify: restart grafana

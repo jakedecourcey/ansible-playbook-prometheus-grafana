@@ -1,0 +1,19 @@
+global:
+    scrape_interval: 15s
+    evaluation_interval: 15s
+
+rule_files:
+  - "{{ prometheus_rule_files_path }}/*.yml"
+
+alerting:
+  alertmanagers:
+    - scheme: http
+      path_prefix: "{{ prometheus_config_path }}"
+      static_configs:
+        - targets: ['localhost:9093']
+
+scrape_configs:
+  - job_name: 'file_scrape'
+    file_sd_configs:
+      - files:
+        - "{{ prometheus_host_files_path }}/*.json"
