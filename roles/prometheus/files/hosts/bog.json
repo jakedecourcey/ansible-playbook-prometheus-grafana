@@ -1,0 +1,58 @@
+[
+  {
+    "targets": [ "localhost:9100"],
+    "labels": {
+      "job": "bog-nas01",
+      "location": "bog",
+      "type": "nas"
+    }
+  },
+  {
+    "targets": [ "192.162.1.1:9100"],
+    "labels": {
+      "job": "bog-er01",
+      "location": "bog",
+      "type": "rtr"
+    }
+  },
+  {
+    "targets": [ "192.162.1.12:9100"],
+    "labels": {
+      "job": "bog-wks01",
+      "location": "bog",
+      "type": "wks"
+    }
+  },
+  {
+    "targets": [ "192.162.1.10:9100"],
+    "labels": {
+      "job": "bog-mbp01",
+      "location": "bog",
+      "type": "wks"
+    }
+  },
+  {
+    "targets": [ "192.162.1.3"],
+    "labels": {
+      "job": "bog-wap01",
+      "location": "bog",
+      "type": "wap"
+    }
+  },
+  {
+    "targets": [ "192.162.1.30"],
+    "labels": {
+      "job": "bog-cam01",
+      "location": "bog",
+      "type": "cam"
+    }
+  },
+  {
+    "targets": [ "192.162.1.31"],
+    "labels": {
+      "job": "bog-cam02",
+      "location": "bog",
+      "type": "cam"
+    }
+  }
+]

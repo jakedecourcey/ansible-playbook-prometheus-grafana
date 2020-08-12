@@ -1,0 +1,58 @@
+[
+  {
+    "targets": [ "localhost:9100"],
+    "labels": {
+      "job": "gye-nas01",
+      "location": "gye",
+      "type": "nas"
+    }
+  },
+  {
+    "targets": [ "192.162.1.1:9100"],
+    "labels": {
+      "job": "gye-er01",
+      "location": "gye",
+      "type": "rtr"
+    }
+  },
+  {
+    "targets": [ "192.162.1.12:9100"],
+    "labels": {
+      "job": "gye-wks01",
+      "location": "gye",
+      "type": "wks"
+    }
+  },
+  {
+    "targets": [ "192.162.1.10:9100"],
+    "labels": {
+      "job": "gye-mbp01",
+      "location": "gye",
+      "type": "wks"
+    }
+  },
+  {
+    "targets": [ "192.162.1.3"],
+    "labels": {
+      "job": "gye-wap01",
+      "location": "gye",
+      "type": "wap"
+    }
+  },
+  {
+    "targets": [ "192.162.1.30"],
+    "labels": {
+      "job": "gye-cam01",
+      "location": "gye",
+      "type": "cam"
+    }
+  },
+  {
+    "targets": [ "192.162.1.31"],
+    "labels": {
+      "job": "gye-cam02",
+      "location": "gye",
+      "type": "cam"
+    }
+  }
+]
