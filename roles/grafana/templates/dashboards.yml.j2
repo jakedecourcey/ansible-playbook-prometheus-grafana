@@ -6,6 +6,8 @@ providers:
 - name: dashboards
   type: file
   updateIntervalSeconds: 30
+  editable: true
+  allowUiUpdates: true
   options:
     path: "{{ grafana_paths_dashboards }}"
     foldersFromFilesStructure: true
