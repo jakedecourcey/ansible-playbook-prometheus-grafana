@@ -54,5 +54,21 @@
       "location": "jmd",
       "type": "cam"
     }
+  },
+  {
+    "targets": [ "192.168.1.5:9080"],
+    "labels": {
+      "job": "jmd-dkr01",
+      "location": "jmd",
+      "type": "dkr"
+    }
+  },
+  {
+    "targets": [ "192.168.1.15:9182"],
+    "labels": {
+      "job": "jmd-ttr01",
+      "location": "jmd",
+      "type": "win"
+    }
   }
 ]
