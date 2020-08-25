@@ -3,3 +3,4 @@
     - prometheus
     - node-exporter
     - grafana
+    - blackbox-exporter

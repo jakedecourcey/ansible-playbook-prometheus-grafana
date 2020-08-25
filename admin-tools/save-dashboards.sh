@@ -28,18 +28,24 @@ select env in "Vagrant" "Production"; do
 done
 
 # GET list of dashboard uids
+echo "Downloading dashboard UIDS"
 UIDS=$(curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://$ENV:3000/api/search\?type\=dash-db | tail -n1 | jq '.[].uid' | sed s/\"//g)
+echo "-----------------------------------"
 
 # Backup old dashboards
-for f in ./$FOLDER/*.json
+echo "Backing up old dashboards"
+for f in $FOLDER/*.json
 do
     cp $f $f.$TIME.bk
 done
+echo "----------------------------------"
 
 # GET each dashboard and save JSON to file
-for d in $UIDS
+echo "Saving dashboards"
+for u in $UIDS
 do
-    JSON=$(curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://$ENV:3000/api/dashboards/uid/$d | tail -n1)
-    TITLE=$(echo $JSON | jq '.dashboard.title' | sed s/\"//g)
-    echo $JSON > ./$FOLDER/$TITLE-$d.json
+    JSON=$(curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://$ENV:3000/api/dashboards/uid/$u | tail -n1 | jq '.dashboard')
+    TITLE=$(echo "$JSON" | jq '.title' | sed s/\"//g)
+    touch $FOLDER'/'$TITLE'-'$u'.json'
+    echo "$JSON" > $FOLDER'/'$TITLE'-'$u'.json'
 done

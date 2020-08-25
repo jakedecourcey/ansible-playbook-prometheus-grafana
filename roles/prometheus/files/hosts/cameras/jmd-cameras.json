@@ -1,0 +1,18 @@
+[
+  {
+    "targets": [ "192.168.1.30"],
+    "labels": {
+      "job": "jmd-cam01",
+      "location": "jmd",
+      "type": "cam"
+    }
+  },
+  {
+    "targets": [ "192.168.1.31"],
+    "labels": {
+      "job": "jmd-cam02",
+      "location": "jmd",
+      "type": "cam"
+    }
+  }
+]

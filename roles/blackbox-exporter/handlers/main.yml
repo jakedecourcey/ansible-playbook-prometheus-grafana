@@ -1,0 +1,7 @@
+---
+
+- name: restart blackbox exporter
+  service:
+    name: blackbox_exporter
+    state: restarted
+    

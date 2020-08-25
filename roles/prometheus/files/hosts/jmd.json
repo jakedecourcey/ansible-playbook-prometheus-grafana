@@ -1,6 +1,6 @@
 [
   {
-    "targets": [ "localhost:9100"],
+    "targets": [ "192.168.1.5:9100"],
     "labels": {
       "job": "jmd-nas01",
       "location": "jmd",
@@ -32,30 +32,6 @@
     }
   },
   {
-    "targets": [ "192.168.1.3"],
-    "labels": {
-      "job": "jmd-wap01",
-      "location": "jmd",
-      "type": "wap"
-    }
-  },
-  {
-    "targets": [ "192.168.1.30"],
-    "labels": {
-      "job": "jmd-cam01",
-      "location": "jmd",
-      "type": "cam"
-    }
-  },
-  {
-    "targets": [ "192.168.1.31"],
-    "labels": {
-      "job": "jmd-cam02",
-      "location": "jmd",
-      "type": "cam"
-    }
-  },
-  {
     "targets": [ "192.168.1.5:9080"],
     "labels": {
       "job": "jmd-dkr01",
@@ -69,6 +45,14 @@
       "job": "jmd-ttr01",
       "location": "jmd",
       "type": "win"
+    }
+  },
+  {
+    "targets": [ "192.168.1.5:9115"],
+    "labels": {
+      "job": "jmd-bbx01",
+      "location": "jmd",
+      "type": "bbx"
     }
   }
 ]
