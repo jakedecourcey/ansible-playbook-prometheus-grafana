@@ -1,0 +1,74 @@
+---
+
+- name: Create the blackbox-exporter group
+  group:
+    name: blackbox-exporter
+    system: true
+
+- name: Create the blackbox-exporter user
+  user:
+    name: blackbox-exporter
+    group: blackbox-exporter
+    system: yes
+    createhome: no
+
+- name: download blackbox exporter
+  get_url:
+    url: 'https://github.com/prometheus/blackbox_exporter/releases/download/v{{ blackbox_version }}/blackbox_exporter-{{ blackbox_version }}.linux-amd64.tar.gz'
+    checksum: "{{ blackbox_checksum }}"
+    dest: /tmp
+
+- name: unzip binary
+  unarchive:
+    src: /tmp/blackbox_exporter-{{ blackbox_version }}.linux-amd64.tar.gz
+    dest: /tmp
+    remote_src: true
+    
+- name: move binary
+  copy:
+    src: "/tmp/blackbox_exporter-{{ blackbox_version }}.linux-amd64/blackbox_exporter"
+    dest: "/usr/local/bin/blackbox_exporter"
+    remote_src: true
+    mode: 0750
+    owner: blackbox-exporter
+    group: blackbox-exporter
+  notify:
+    - restart blackbox exporter
+
+- name: Install libcap dependency on Debian systems
+  package:
+    name: "libcap2-bin"
+    state: present
+
+- name: Ensure blackbox exporter binary has cap_net_raw capability
+  capabilities:
+    path: '/usr/local/bin/blackbox_exporter'
+    capability: cap_net_raw+ep
+    state: present
+
+- name: create blackbox service
+  copy:
+    src: blackbox_exporter.service
+    dest: /lib/systemd/system
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart blackbox exporter
+
+- name: configure blackbox exporter
+  copy:
+    src: blackbox_exporter.yml
+    dest: /etc/blackbox_exporter.yml
+    owner: blackbox-exporter
+    group: blackbox-exporter
+    mode: 0644
+  notify:
+    - restart blackbox exporter
+
+- name: ensure blackbox_exporter service is started and enabled
+  service:
+    daemon_reload: true
+    name: blackbox_exporter
+    state: started
+    enabled: true
