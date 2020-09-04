@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 19,
-  "iteration": 1598375438096,
+  "iteration": 1598379518130,
   "links": [],
   "panels": [
     {
@@ -679,7 +679,24 @@
             "align": null
           },
           "decimals": 0,
-          "mappings": [],
+          "mappings": [
+            {
+              "from": "",
+              "id": 0,
+              "text": "Up",
+              "to": "",
+              "type": 1,
+              "value": "1"
+            },
+            {
+              "from": "",
+              "id": 1,
+              "text": "Down",
+              "to": "",
+              "type": 1,
+              "value": "0"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -720,7 +737,7 @@
       "pluginVersion": "7.1.5",
       "targets": [
         {
-          "expr": "rate(container_last_seen{name!=\"\"}[1m])",
+          "expr": "container_last_seen{name!=\"\"} > bool (time() - 300)",
           "instant": true,
           "interval": "",
           "legendFormat": "{{name}}",
@@ -882,5 +899,5 @@
   "timezone": "",
   "title": "Location",
   "uid": "Tw3YLfNMz",
-  "version": 2
+  "version": 4
 }
