@@ -14,5 +14,21 @@
       "location": "jmd",
       "type": "cam"
     }
+  },
+  {
+    "targets": [ "192.168.1.32"],
+    "labels": {
+      "job": "jmd-cam03",
+      "location": "jmd",
+      "type": "cam"
+    }
+  },
+  {
+    "targets": [ "1.1.1.1"],
+    "labels": {
+      "job": "jmd-int01",
+      "location": "jmd",
+      "type": "net"
+    }
   }
 ]

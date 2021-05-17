@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 26,
-  "iteration": 1612221698870,
+  "iteration": 1603724836282,
   "links": [],
   "panels": [
     {
@@ -87,7 +87,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.1.5",
       "targets": [
         {
           "expr": "up{location=\"$location\", type!~\"cam|bbx|dkr\"}",
@@ -170,7 +170,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.1.5",
       "targets": [
         {
           "expr": "probe_success{location=\"$location\", type=\"cam\"}",
@@ -184,381 +184,6 @@
       "timeShift": null,
       "title": "Cameras",
       "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "from": "",
-              "id": 1,
-              "text": "Up",
-              "to": "",
-              "type": 1,
-              "value": "1"
-            },
-            {
-              "from": "",
-              "id": 2,
-              "text": "Down",
-              "to": "",
-              "type": 1,
-              "value": "0"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 1
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byType",
-              "options": "number"
-            },
-            "properties": []
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 12,
-        "x": 6,
-        "y": 0
-      },
-      "id": 7,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.3.7",
-      "targets": [
-        {
-          "expr": "probe_success{job=\"jmd-int01\"}",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Internet Connection",
-      "type": "stat"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 3,
-        "x": 18,
-        "y": 0
-      },
-      "id": 4,
-      "options": {
-        "displayMode": "lcd",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true
-      },
-      "pluginVersion": "7.3.7",
-      "targets": [
-        {
-          "expr": "(sum by (job) (rate(node_cpu_seconds_total{location=\"$location\", mode!= 'idle'}[1m])) / sum by (job) (rate(node_cpu_seconds_total{location=\"$location\"}[1m])) ) * 100",
-          "interval": "",
-          "legendFormat": "{{job}}",
-          "refId": "A"
-        },
-        {
-          "expr": "(sum by (job) (rate(node_cpu{location=\"$location\", mode!= 'idle'}[1m])) / sum by (job) (rate(node_cpu{location=\"$location\"}[1m])) ) * 100",
-          "interval": "",
-          "legendFormat": "{{job}}",
-          "refId": "B"
-        },
-        {
-          "expr": "sum by (job) (rate(windows_cpu_time_total{mode!=\"idle\"}[1m])) / sum by (job) (rate(windows_cpu_time_total[1m])) * 100",
-          "interval": "",
-          "legendFormat": "{{job}}",
-          "refId": "C"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "CPU Load",
-      "type": "bargauge"
-    },
-    {
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "percentage",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 3,
-        "x": 21,
-        "y": 0
-      },
-      "id": 8,
-      "options": {
-        "displayMode": "lcd",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "last"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true
-      },
-      "pluginVersion": "7.3.7",
-      "targets": [
-        {
-          "expr": "100 * (1 - ((avg_over_time(node_memory_MemFree{location=\"$location\"}[1m]) + avg_over_time(node_memory_Cached{location=\"$location\"}[1m]) + avg_over_time(node_memory_Buffers{location=\"$location\"}[1m])) / avg_over_time(node_memory_MemTotal{location=\"$location\"}[1m])))",
-          "hide": false,
-          "instant": true,
-          "interval": "",
-          "legendFormat": "{{job}}",
-          "refId": "A"
-        },
-        {
-          "expr": "100 * (1 - ((avg_over_time(node_memory_MemFree_bytes{location=\"$location\"}[1m]) + avg_over_time(node_memory_Cached_bytes{location=\"$location\"}[1m]) + avg_over_time(node_memory_Buffers_bytes{location=\"$location\"}[1m])) / avg_over_time(node_memory_MemTotal_bytes{location=\"$location\"}[1m])))",
-          "hide": false,
-          "instant": true,
-          "interval": "",
-          "legendFormat": "{{job}}",
-          "refId": "B"
-        },
-        {
-          "expr": "100 * (avg_over_time(node_memory_free_bytes{location=\"$location\"}[1m]) / avg_over_time(node_memory_total_bytes{location=\"$location\"}[1m]))",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{job}}",
-          "refId": "C"
-        },
-        {
-          "expr": "(1 - ((avg_over_time(windows_os_virtual_memory_free_bytes[1m])) / windows_cs_physical_memory_bytes) ) * 100",
-          "interval": "",
-          "legendFormat": "{{job}}",
-          "refId": "D"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "RAM Load",
-      "type": "bargauge"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "from": "",
-              "id": 1,
-              "text": "Up",
-              "to": "",
-              "type": 1,
-              "value": "1"
-            },
-            {
-              "from": "",
-              "id": 2,
-              "text": "Down",
-              "to": "",
-              "type": 1,
-              "value": "0"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 1
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byType",
-              "options": "number"
-            },
-            "properties": []
-          }
-        ]
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 12,
-        "x": 6,
-        "y": 2
-      },
-      "hiddenSeries": false,
-      "id": 14,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.3.7",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum by(job)(probe_icmp_duration_seconds{job=\"jmd-int01\"})",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "Ping to 1.1.1.1",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Internet Latency",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:418",
-          "format": "s",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:419",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
     },
     {
       "aliasColors": {},
@@ -578,7 +203,7 @@
         "h": 8,
         "w": 12,
         "x": 6,
-        "y": 8
+        "y": 0
       },
       "hiddenSeries": false,
       "id": 6,
@@ -596,11 +221,8 @@
       "lines": true,
       "linewidth": 1,
       "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.1.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -698,6 +320,265 @@
         "h": 8,
         "w": 3,
         "x": 18,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.1.5",
+      "targets": [
+        {
+          "expr": "(sum by (job) (rate(node_cpu_seconds_total{location=\"$location\", mode!= 'idle'}[1m])) / sum by (job) (rate(node_cpu_seconds_total{location=\"$location\"}[1m])) ) * 100",
+          "interval": "",
+          "legendFormat": "{{job}}",
+          "refId": "A"
+        },
+        {
+          "expr": "(sum by (job) (rate(node_cpu{location=\"$location\", mode!= 'idle'}[1m])) / sum by (job) (rate(node_cpu{location=\"$location\"}[1m])) ) * 100",
+          "interval": "",
+          "legendFormat": "{{job}}",
+          "refId": "B"
+        },
+        {
+          "expr": "sum by (job) (rate(windows_cpu_time_total{mode!=\"idle\"}[1m])) / sum by (job) (rate(windows_cpu_time_total[1m])) * 100",
+          "interval": "",
+          "legendFormat": "{{job}}",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "CPU Load",
+      "type": "bargauge"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 3,
+        "x": 21,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "7.1.5",
+      "targets": [
+        {
+          "expr": "100 * (1 - ((avg_over_time(node_memory_MemFree{location=\"$location\"}[1m]) + avg_over_time(node_memory_Cached{location=\"$location\"}[1m]) + avg_over_time(node_memory_Buffers{location=\"$location\"}[1m])) / avg_over_time(node_memory_MemTotal{location=\"$location\"}[1m])))",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{job}}",
+          "refId": "A"
+        },
+        {
+          "expr": "100 * (1 - ((avg_over_time(node_memory_MemFree_bytes{location=\"$location\"}[1m]) + avg_over_time(node_memory_Cached_bytes{location=\"$location\"}[1m]) + avg_over_time(node_memory_Buffers_bytes{location=\"$location\"}[1m])) / avg_over_time(node_memory_MemTotal_bytes{location=\"$location\"}[1m])))",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{job}}",
+          "refId": "B"
+        },
+        {
+          "expr": "100 * (avg_over_time(node_memory_free_bytes{location=\"$location\"}[1m]) / avg_over_time(node_memory_total_bytes{location=\"$location\"}[1m]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{job}}",
+          "refId": "C"
+        },
+        {
+          "expr": "(1 - ((avg_over_time(windows_os_virtual_memory_free_bytes[1m])) / windows_cs_physical_memory_bytes) ) * 100",
+          "interval": "",
+          "legendFormat": "{{job}}",
+          "refId": "D"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "RAM Load",
+      "type": "bargauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 6,
+        "y": 8
+      },
+      "hiddenSeries": false,
+      "id": 7,
+      "legend": {
+        "alignAsTable": false,
+        "avg": true,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "7.1.5",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:74"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(irate(node_network_transmit_bytes_total{device='eth2', type='rtr'}[1m])) * 8",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{device}} down",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(irate(node_network_receive_bytes_total{device='eth2', type='rtr'}[1m])) * -8",
+          "interval": "",
+          "legendFormat": "{{device}} up",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "WAP Traffic",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "Bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 3,
+        "x": 18,
         "y": 8
       },
       "id": 10,
@@ -713,7 +594,7 @@
         },
         "showUnfilled": true
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.1.5",
       "targets": [
         {
           "expr": "(1 - (windows_logical_disk_free_bytes{volume=\"C:\"} / windows_logical_disk_size_bytes{volume=\"C:\"})) * 100",
@@ -784,7 +665,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.1.5",
       "targets": [
         {
           "expr": "windows_logical_disk_free_bytes{volume=\"C:\"}",
@@ -875,7 +756,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "7.1.5",
       "targets": [
         {
           "expr": "container_last_seen{name!=\"\"} > bool (time() - 300)",
@@ -906,7 +787,6 @@
         },
         "datasource": "Prometheus",
         "definition": "label_values(job)",
-        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": null,
@@ -979,7 +859,6 @@
         },
         "datasource": "Prometheus",
         "definition": "label_values(location)",
-        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": null,
@@ -1042,5 +921,5 @@
   "timezone": "",
   "title": "Location",
   "uid": "Tw3YLfNMz",
-  "version": 14
+  "version": 8
 }

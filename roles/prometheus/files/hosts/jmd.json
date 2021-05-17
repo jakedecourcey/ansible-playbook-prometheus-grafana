@@ -4,7 +4,7 @@
     "labels": {
       "job": "jmd-nas01",
       "location": "jmd",
-      "type": "nas"
+      "type": "srv"
     }
   },
   {
@@ -13,6 +13,22 @@
       "job": "jmd-er01",
       "location": "jmd",
       "type": "rtr"
+    }
+  },
+  {
+    "targets": [ "192.168.1.5:9256"],
+    "labels": {
+      "job": "jmd-min01",
+      "location": "jmd",
+      "type": "min"
+    }
+  },
+  {
+    "targets": [ "192.168.1.18:9100"],
+    "labels": {
+      "job": "jmd-pi01",
+      "location": "jmd",
+      "type": "srv"
     }
   },
   {
@@ -53,6 +69,14 @@
       "job": "jmd-bbx01",
       "location": "jmd",
       "type": "bbx"
+    }
+  },
+  {
+    "targets": [ "192.168.1.18:9617"],
+    "labels": {
+      "job": "jmd-pih01",
+      "location": "jmd",
+      "type": "pih"
     }
   }
 ]
